@@ -2,13 +2,11 @@
 layout: post
 title: Fee Credits
 subtitle: A fee mechanism that lowers costs and increases engagement for users.
-thumbnail-img: /assets/img/fee-credits.png
+# thumbnail-img: /assets/img/fee-credits.png
 share-img: /assets/img/path.jpg
 tags: [fee, protocol, ideas]
 author: Dev Ohja and Alpin Yukseloglu
 ---
-
-# Fee Credits
 
 Transaction fees play a crucial role in providing sybil resistance for blockchain protocols. In spite of transaction fees consistently being termed "revenue" for protocols (especially ones that have fee burns in place), it is important to keep in mind that the primary goal of these fees should not be to generate profit for the protocol, but rather to ensure the security and usability of the network. In order to achieve this, we propose a "Fee Credit" system, which would allow users to earn non-transferable credits through various actions that benefit the network. These credits can then be used to pay for transaction fees, effectively reducing or eliminating costs for users.
 
