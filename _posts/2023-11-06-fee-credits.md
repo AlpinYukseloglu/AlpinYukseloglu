@@ -89,6 +89,14 @@ The following steps outline a high-level implementation plan:
     * x/mint: Sending some number of fee credits per day to the address that distributes staking rewards
     * posthandler: Give some number of fee credits directly upon successful tx with sufficient amount staked
 
+## Open Question: Inclusion Guarantees
+
+While the fee credit mechanism described in this article has many benefits, it does face some headwinds in specific applications that do not involve any direct compensation/tip for validators. Specifically, in cases where we expect fee credits to cover the entire transaction fee, we run the risk of validators having no incentive to prioritize the transaction over ones that do pay some priority fee in the form of a tip. In cases where nothing at all is paid to the validator, we also run the risk of validators censoring because there is no incentive for inclusion.
+
+We have a number of ideas on how this could potentially be remedied (ranging from changing tip distribution logic to earmarking chain-enforced or chain-subsidized transaction lanes), but we are leaving this point here as an open question as we do not as of now have a concrete solution to this problem.
+
+It is important that the long term inclusion problem is solved if we want to ensure that fee-free transactions can gain adoption without leaning on goodwill of validators. For many transaction types (such as swaps with taker fees distributed to stakers), there will be an inherent incentive to include the transactions so this will be less of any issue. But for cases in which no fees flow to validators, it is important to consider the implications of using a fee credit system on long term inclusion guarantees to ensure the system functions as intended.
+
 ## Conclusion
 
 Fee credits can serve as a powerful tool for protocol designers and app developers to provide low-fee or even fee-free user flows for their applications, paving the way for a new class of more accessible, cost-effective, and compelling user flows.
