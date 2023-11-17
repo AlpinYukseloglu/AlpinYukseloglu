@@ -3,7 +3,7 @@ layout: post
 title: Fee Credits
 subtitle: A fee mechanism that lowers costs and increases engagement for users.
 # thumbnail-img: /assets/img/fee-credits.png
-share-img: /assets/img/path.jpg
+share-img: /assets/img/fee-credits.png
 tags: [fee mechanisms, protocol design]
 author: Dev Ojha and Alpin Yukseloglu
 ---
