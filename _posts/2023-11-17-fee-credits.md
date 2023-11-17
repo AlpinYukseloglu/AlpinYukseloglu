@@ -20,7 +20,7 @@ To be clear: the primary goal of fees is to ensure the security and usability of
 
 They may serve as a form of revenue as a byproduct of this, in the same way that any economic cost is a form of “revenue” for some other party in the system. However, the fundamental purpose of fees is not profit. It is to protect the network from spam.
 
-In this post, we outline below a new mechanism that leans on this fact to allow users to pay less in fees while maintaining security properties of the underlying fee market. The primitive introduced, however, has much more far-reaching implications than merely lower costs for users.
+In this post, we outline below a new mechanism that leans on this fact to allow users to pay less in fees while maintaining security properties of the underlying fee market. The primitive we introduce, however, has much more far-reaching implications than merely lower costs for users.
 
 ## Motivation
 
@@ -32,7 +32,7 @@ In other words, the problem with the usual one-size-fits-all fee model is that i
 
 By introducing a fee credit system, we can bring this broader set of user activities in-scope for our fee markets. Perhaps even more importantly, we can add configurable weights to different activities, nudging users towards desirable actions that contribute to the network while at the same time reducing or eliminating transaction fees for important parts of the user experience.
 
-At a bare minimum, this would drastically lower costs and improve user experience for most users. In the best case, it could unlock an entirely new class of user flows and applications that lean on having low/no fees for users.
+At a bare minimum, this would drastically lower costs and improve user experience for most users. In the best case, it could unlock an entirely new class of user flows through applications that lean on having low/no fees for users.
 
 ## Specification
 
@@ -43,9 +43,9 @@ The design space for fee credits is vast, especially with regards to the behavio
 A fee credit can be defined as an interface that has the following properties:
 
 - Represented as a non-transferable token (for instance, a native Cosmos SDK coin restricted to be non-transferable)
-- A maximum amount of credits per account (excess credits earned would not be granted)
+- Constrained maximum amount of credits per account (excess credits earned would not be granted)
 - Usable for transaction fees at a rate of 1 base gas unit = 1 fee credit
-- When a fee credit is collected for a transaction fee, it is burned
+- Burned when collected for a transaction fee
 - Cannot be used for any form of fee delegation, as would be the case with fee grants implemented by most protocols or, on the Cosmos stack, through Authz. This is to prevent delegated usage of fee credits, which would violate non-transferability.
 
 Each of these properties enforce important constraints to ensure that fee credits serve the purpose they are intended to. While further properties could potentially be added for mechanisms that build off of fee credits as a primitive (e.g. if one wants to create a market for credits), the ones outlined above are kept as minimal as possible so as to not overconstrain the design space.
@@ -58,24 +58,24 @@ The common thread is simple: **it must introduce a credible economic cost to spa
 
 As long as this core property is satisfied (and the specific amounts are well parameterized), almost any form of economic activity that results in a net cost to the user can potentially be used as an opportunity to generate fee credits.
 
-That being said, here are a few examples of what we believe are sound, broadly applicable, and immediately useful examples of ways to earn fee credits:
+With that said, here are a few examples of what we believe are sound, broadly applicable, and immediately useful examples of ways to generate fee credits:
 
 1. **Token Locking**: Users can lock tokens of economic value, such as LP shares or staking tokens, to earn fee credits. This provides sybil resistance and aligns user incentives with the network's health.
-2. **Staking Rewards**: Staking rewards will accumulate fee credits for users. When users claim their staking rewards, they will also receive fee credits up to the maximum balance per account. This approach improves upon EOS's conceptualization by giving stakers direct rights over block space with fee credits.
+2. **Staking Rewards**: Staking rewards can accumulate fee credits for users. When users claim their staking rewards, they will also receive fee credits up to the maximum balance per account. This approach improves upon EOS's conceptualization by giving stakers direct rights over block space with fee credits.
 3. **Accepted Governance Proposals**: Users who submit governance proposals that are accepted by the community will receive fee credits as a reward for their positive contributions to the network.
 4. **Swap Fees in Large AMM Pools**: Users who provide liquidity in large AMM pools will earn fee credits based on the swap fees they generate. This encourages users to contribute to the liquidity and overall health of the ecosystem and makes **swaps essentially free for most users** in terms of tx fees!
 
 ### Spending Fee Credits
 
-There are generally two ways for users to spend their fee credits: either on the transaction that generates them, or on some other transaction in the future. A basic interpretation of the mechanism outlined so far might assume that only the latter way would be supported, and that fee credits could only be used for activity that comes after the transaction that generates them. We would like to take a moment to demonstrate how incorporating the former approach instead could unlock quite elegant user flows.
+There are generally two ways for users to spend their fee credits: either on the transaction that generates them, or on some other transaction in the future. A basic interpretation of the mechanism outlined so far might assume that only the latter would be supported and that fee credits could only be used for activity that comes after the transaction that generates them. We would like to take a moment to demonstrate how incorporating the former approach instead could unlock quite elegant user flows.
 
 As a guiding example, when a user swaps on Osmosis, they pay two fees: a swap fee and a transaction fee. Since the latter is a cost that is primarily pushed onto the user to prevent spam, it should be possible to have it be partially or fully covered by the swap fee paid in the transaction. The net impact of such a feature would be that the user does not have to double-pay on the overlapping portion of the fees in their swap transaction. A framing of this consistent with our fee credit mechanism would be that the swap fee generates fee credits that are immediately consumed towards the same transaction.
 
-The generalized version of this would be the allow all fee credits to be consumed by the transactions that generate them, and only have excess credits remain in the account afterwards. This flow can allow for many important parts of an application's user flow to cost essentially no transaction fees without requiring the chain to subsidize the transactions.
+The generalized version of this would be the allow all fee credits to be consumed by the transactions that generate them, and only have excess credits remain in the account afterwards. This flow can allow for many important parts of an application's user flow to cost essentially no transaction fees without requiring the chain to provide subsidies.
 
 ### Implementation
 
-While fee credit systems can be built into any chain infrastructure, the full breadth of the design space can only really be explored in an app-specific context. As a result, we've outlined a brief implementation-level spec to aid with anyone who is interested in building fee credits on the Cosmos SDK, either as a feature for their own chain or as an open source module for other appchains to integrate.
+While fee credit systems can be built into any chain infrastructure, the full breadth and depth of the design space can only really be explored in an app-specific context where the earning and spending operations for credits can be tailored to the context of the application. As a result, we've outlined a brief implementation-level spec to aid with anyone who is interested in building fee credits on the Cosmos SDK, either as a feature for their own chain or as an open source module for other appchains to integrate.
 
 The following steps outline a high-level implementation plan:
 
@@ -91,11 +91,11 @@ The following steps outline a high-level implementation plan:
 
 ## Open Question: Inclusion Guarantees
 
-While the fee credit mechanism described in this article has many benefits, it does face some headwinds in specific applications that do not involve any direct compensation/tip for validators. Specifically, in cases where we expect fee credits to cover the entire transaction fee, we run the risk of validators having no incentive to prioritize the transaction over ones that do pay some priority fee in the form of a tip. In cases where nothing at all is paid to the validator, we also run the risk of validators censoring because there is no incentive for inclusion.
+While the fee credit mechanism described in this article has many benefits, it does face some headwinds in specific applications that do not involve any direct compensation/tip for validators. Specifically, in cases where we expect fee credits to cover the entire transaction fee, we run the risk of validators having no incentive to prioritize the transaction over ones that do pay some priority fee or tip. In cases where nothing at all is paid to the validator, we also run the risk of validators censoring the transaction algother because there is no direct incentive for taking on the compute cost of inclusion.
 
-We have a number of ideas on how this could potentially be remedied (ranging from changing tip distribution logic to earmarking chain-enforced or chain-subsidized transaction lanes), but we are leaving this point here as an open question as we do not as of now have a concrete solution to this problem.
+We have a number of ideas on how this could potentially be remedied (ranging from changing tip distribution logic to earmarking chain-enforced or chain-subsidized transaction lanes), but we are leaving this point here as an open research question instead as we believe that this is an interesting frontier with many viable and diverse potential paths forward.
 
-It is important that the long term inclusion problem is solved if we want to ensure that fee-free transactions can gain adoption without leaning on goodwill of validators. For many transaction types (such as swaps with taker fees distributed to stakers), there will be an inherent incentive to include the transactions so this will be less of any issue. But for cases in which no fees flow to validators, it is important to consider the implications of using a fee credit system on long term inclusion guarantees to ensure the system functions as intended.
+It is important that the long term inclusion problem is solved if we want to ensure that fee-free transactions can gain adoption without leaning on goodwill of validators. That being said, for many transaction types (such as swaps with taker fees distributed to stakers), there will be an inherent incentive to include the transactions so this will be less of any issue. In the slice of cases in which no fees flow to validators, however, it is important to consider the implications of using a fee credit system on long term inclusion guarantees so that one can ensure the system functions as intended.
 
 ## Conclusion
 
