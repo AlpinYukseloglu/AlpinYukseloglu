@@ -97,7 +97,7 @@ While the fee credit mechanism described in this article has many benefits, it d
 
 We have a number of ideas on how this could potentially be remedied (ranging from changing tip distribution logic to earmarking chain-enforced or chain-subsidized transaction lanes), but we are leaving this point here as an open research question instead as we believe that this is an interesting frontier with many viable and diverse potential paths forward.
 
-It is important that the long term inclusion problem is solved if we want to ensure that fee-free transactions can gain adoption without leaning on goodwill of validators. That being said, for many transaction types (such as swaps with taker fees distributed to stakers), there will be an inherent incentive to include the transactions so this will be less of an issue. In the slice of cases in which no fees flow to validators, however, it is important to consider the implications of using a fee credit system on long term inclusion guarantees so that one can ensure the system functions as intended.
+It is important that the long term inclusion problem is solved if we want to ensure that fee-free transactions can gain adoption without leaning on the goodwill of validators. That being said, for many transaction types (such as swaps with taker fees distributed to stakers), there will be an inherent incentive to include the transactions so this will be less of an issue. In the slice of cases in which no fees flow to validators, however, it is important to consider the implications of using a fee credit system on long term inclusion guarantees so that one can ensure the system functions as intended.
 
 ## Conclusion
 
