@@ -1,7 +1,7 @@
 ---
 layout: post
 title: The Dangers of Portfolio Margining
-subtitle: How a seemingly simple UX improvement can lead to unbounded fragility to build up in derivatives products.
+subtitle: If everyone does it, how bad can it be?
 # thumbnail-img: /assets/img/fee-credits.png
 share-img: /assets/img/portfolio-margining.png
 tags: [perps, protocol design]
