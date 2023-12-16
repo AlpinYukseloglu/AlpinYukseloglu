@@ -4,7 +4,7 @@ title: Dangers of Portfolio Margining
 subtitle: If everyone does it, how bad can it be?
 # thumbnail-img: /assets/img/fee-credits.png
 share-img: /assets/img/portfolio-margining.png
-tags: [perps, leverage, protocol design]
+tags: [perps, leverage, mechanism design]
 author: Alpin Yukseloglu and Dev Ojha
 ---
 
