@@ -1,10 +1,10 @@
 ---
 layout: post
-title: The Dangers of Portfolio Margining
+title: Dangers of Portfolio Margining
 subtitle: If everyone does it, how bad can it be?
 # thumbnail-img: /assets/img/fee-credits.png
 share-img: /assets/img/portfolio-margining.png
-tags: [perps, protocol design]
+tags: [perps, leverage, protocol design]
 author: Alpin Yukseloglu and Dev Ojha
 ---
 
@@ -128,7 +128,7 @@ One potential path forward is to borrow a guardrail commonly used for volatile c
 
 While this approach does not change the asymptotic behavior of the system (i.e. it still behaves according to power equations), it can still have an outsized impact on dampening the risk the protocol takes on.
 
-This becomes much clearer when one reframes the discount factor as simply allowing for a lower leverage factor on unrealized profits: in our example above, if the previous allowed leverage was $3$x, then the allowed leverage on unrealized profits would be $0.75 \cdot 3 = 2.25$x.
+This becomes much clearer when one reframes the discount factor as simply allowing for a lower leverage factor on unrealized profits: in our example above, if the previous allowed leverage was 3x, then the allowed leverage on unrealized profits would be 0.75 * 3 = 2.25x.
 
 Since we've established that the payoff curve follows an exponential relationship with the leverage factor, even a small discount factor can reduce tail risk drastically. After all, the exponential relationship works both ways!
 
@@ -158,7 +158,7 @@ The specific scenarios we analyze above explore a tiny slice of the broader risk
 
 If one examines the plots demonstrating the effect of increasing the leverage factor, the curves carry an uncanny resemblance to a seemingly completely unrelated product: [power perpetuals](https://www.paradigm.xyz/2021/08/power-perpetuals).
 
-While the relationship is more complex than merely plotting $ETH^L$ on our graphs above, it is clear that some relationship exists here, and more formally deriving what exactly it is (and how it varies with the leverage factor $L$) would be an extremely interesting future direction to explore.
+While the relationship is more complex than merely plotting ETH^L on our graphs above, it is clear that some relationship exists here, and more formally deriving what exactly it is (and how it varies with the leverage factor L) would be an extremely interesting future direction to explore.
 
 The conclusion one can draw from this, if successful, is quite astonishing: adding the ability to lever on unrealized profits would be equivalent to enabling full-feature power perps! A realization like this might, for example, have serious implications for how funding rates are calculated in such systems (as well as for many other parts of the risk engine as well).
 
