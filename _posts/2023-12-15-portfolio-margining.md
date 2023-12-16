@@ -68,7 +68,7 @@ For the sake of example, we take the tick size of price increases to a very smal
 
 If we track the asset value of such a construction as price increases, we get the following behavior (assuming a tick size of 0.1% growth, initial collateral of 1 USDC, and leverage factor of 3x):
 
-![Screenshot 2023-11-21 at 2.10.53 PM](https://hackmd.io/_uploads/rJzLn05Np.png)
+<img width="690" alt="leverage chart 1" src="https://github.com/AlpinYukseloglu/AlpinYukseloglu.github.io/assets/62043214/37bc4a1e-7f33-4280-8f2e-c503b6eb9f19">
 
 Given that the x-axis shows a linear increase in price, it should be abundantly clear that the portfolio above grows superlinearly with respect to price increase.
 
@@ -76,7 +76,7 @@ The liabilities plot shows us something perhaps even more concerning: for a mere
 
 As we see, both the portfolio asset  and liabilities curves follow power equations, although we leave the proof for this to a future post.
 
-![Screenshot 2023-11-21 at 2.11.56 PM](https://hackmd.io/_uploads/BkFrhC5Np.png)
+<img width="690" alt="leverage chart 2" src="https://github.com/AlpinYukseloglu/AlpinYukseloglu.github.io/assets/62043214/f4fe3e38-eed6-45c5-9ec0-0f10226610b5">
 
 It is worth keeping in mind that while the margin for the position stays relatively stable during this growth, an increasing portion of it is in unrealized profits that will be torn down in the event of even a small price dip.
 
@@ -96,11 +96,11 @@ Unfortunately, this too would be incorrect. In fact, it would not even be close.
 
 If we take the same example from the previous section and plot it for different leverage factors on re-levering operations (say, 1x through 5x), we get the following shocking result:
 
-![Screenshot 2023-11-21 at 2.11.37 PM](https://hackmd.io/_uploads/SkRQhRqNa.png)
+<img width="690" alt="leverage chart 3" src="https://github.com/AlpinYukseloglu/AlpinYukseloglu.github.io/assets/62043214/0ff3c956-0680-4632-aa3d-d2f75813f741">
 
 It turns out that even the relationship between assets in a portfolio and leverage is superlinear. If we extend the x-axis further, the asymptotic behavior becomes even clearer:
 
-![Screenshot 2023-11-21 at 2.11.45 PM](https://hackmd.io/_uploads/SyD4hR546.png)
+<img width="689" alt="leverage chart 4" src="https://github.com/AlpinYukseloglu/AlpinYukseloglu.github.io/assets/62043214/eee7f47e-eef0-4cea-b244-d12c67cfd812">
 
 It seems that the relationship is not just superlinear, but exponential!
 
