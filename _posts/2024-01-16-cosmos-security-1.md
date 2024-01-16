@@ -4,7 +4,7 @@ title: The Cosmos Security Handbook
 subtitle: Part 1 - Core Chain
 # thumbnail-img: /assets/img/fee-credits.png
 share-img: /assets/img/security-1.png
-tags: [fee mechanisms, protocol design]
+tags: [security, protocol design]
 author: Roman Akhtariev and Alpin Yukseloglu
 ---
 The defining property of the Cosmos stack is that it is unconstrained. The layers of the stack are porous and, to a sufficiently motivated developer, nothing is off-limits. From a security standpoint, this freedom can be terrifying.
