@@ -231,8 +231,7 @@ Our hope with this post was to lay the groundwork from a security standpoint for
 As an ecosystem, we cannot afford recklessness or lack of security awareness. **If you have any feedback or contributions you would like to see added to this post (or one of our future posts on CosmWasm and IBC), please reach out to us on Twitter/X @0xalpo and @akhtariev!**
 
 ## Appendix
-<details>
-    <summary><span style="font-weight: bold; font-size: 1.17em;">State-machine Scope</span></summary>
+### State-machine Scope
 
 The state-machine scope includes the following areas:
 
@@ -259,10 +258,8 @@ The following are NOT in the state-machine scope:
 - ABCI 2.0 `ExtendVote`
 - `AnteHander`s in any mode other than `execModeFinalize`
 - `PostHander`s in any mode other than `execModeFinalize`
-</details>
 
-<details>
-    <summary><span style="font-weight: bold; font-size: 1.17em;">Key Malleability and Prefix Iteration Attack Example</span></summary>
+### Key Malleability and Prefix Iteration Attack Example
     
 Consider the code below that checks whether the given address is the owner of a given position ID via an`IsPositionOwner` function. The `KeyAddressPoolIdPositionId` formats the key ending with a pool ID as a string. `HasAnyAtPrefix` function checks if there exists an entry at a given prefix. 
 
@@ -336,4 +333,3 @@ func main() {
 Both `poolIDOne` and `poolIDTwo` have the same prefix.
 
 Now, our original position existence check with `HasAnyAtPrefix` would pass if it was run on `poolID` of `42` when the user only owned a position ID `421`. This can result in malicious users getting access to positions that they do not own.
-    </details>
